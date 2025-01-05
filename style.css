@@ -669,3 +669,206 @@ footer a:hover {
     height: auto;
   }
 }
+:root {
+  --text-color: #f0f0f0;
+  --heading-color: #ffffff;
+  --subheading-color: #e0e0e0;
+  --link-color: #add8e6;
+  --link-hover-color: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.7);
+  --section-bg: rgba(0, 0, 0, 0.5);
+  --card-bg: rgba(0, 0, 0, 0.6);
+  --button-bg: rgba(255, 255, 255, 0.1);
+  --header-bg: #000000;
+  --separator-color: rgba(255, 255, 255, 0.4);
+  --font-bold: 700;
+  --font-normal: 400;
+  --font-light: 300;
+  --font-family: "Montserrat", sans-serif;
+  --transition-speed: 0.3s;
+  --separator-height: 3px;
+  --separator-width: 80%;
+  --separator-margin-top: 80px;
+  --section-padding: 120px 20px;
+  --section-margin-bottom: 60px;
+  --nav-height: 60px;
+  --hamburger-size: 25px;
+  --cookie-banner-bg: rgba(0, 0, 0, 0.85);
+  --cookie-banner-text: #ffffff;
+  --cookie-banner-button-bg: #ffffff;
+  --cookie-banner-button-text: #000000;
+  --cookie-banner-button-hover-bg: #cccccc;
+  --toggle-button-bg: #2c3e50;
+  --toggle-button-text: #ffffff;
+  --toggle-button-hover-bg: #34495e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-color);
+  background: linear-gradient(to bottom right, #f7f7f7, #ebebeb),
+    url("photo/fond.png") center/cover no-repeat fixed;
+  background-blend-mode: multiply;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(34, 34, 34, 0.4);
+  z-index: -1;
+}
+
+header {
+  background: var(--header-bg);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background var(--transition-speed);
+  box-shadow: 0 2px 5px rgba(150, 150, 150, 0.3);
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--nav-height);
+  padding: 0 20px;
+  position: relative;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  transition: max-height var(--transition-speed) ease-in-out;
+}
+
+nav li {
+  position: relative;
+}
+
+nav a, .toggle-button {
+  text-decoration: none;
+  color: var(--heading-color);
+  font-weight: var(--font-bold);
+  padding: 8px 12px;
+  position: relative;
+  transition: color var(--transition-speed), transform var(--transition-speed);
+  text-shadow: 1px 1px 3px var(--shadow-color);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 2px;
+  background: #cccccc;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease-in-out, background 0.4s ease-in-out;
+}
+
+nav a:hover, .toggle-button:hover {
+  color: var(--link-hover-color);
+  transform: translateY(-2px);
+}
+
+nav a:hover::after {
+  background: var(--heading-color);
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: var(--hamburger-size);
+  height: var(--hamburger-size);
+  cursor: pointer;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: var(--heading-color);
+  border-radius: 2px;
+  transition: transform var(--transition-speed), opacity var(--transition-speed);
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.gallery-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  margin: 20px auto;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.gallery-item img:hover {
+  transform: scale(1.05);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 5px;
+  }
+
+  .gallery-item img {
+    border-radius: 3px;
+  }
+}
