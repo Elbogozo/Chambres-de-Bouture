@@ -10,30 +10,23 @@
   --button-bg: rgba(255, 255, 255, 0.1);
   --header-bg: #000000;
   --separator-color: rgba(255, 255, 255, 0.4);
-  
   --font-bold: 700;
   --font-normal: 400;
   --font-light: 300;
   --font-family: "Montserrat", sans-serif;
-  
   --transition-speed: 0.3s;
-  
   --separator-height: 3px;
   --separator-width: 80%;
   --separator-margin-top: 80px;
-  
   --section-padding: 120px 20px;
   --section-margin-bottom: 60px;
-  
   --nav-height: 60px;
   --hamburger-size: 25px;
-
   --cookie-banner-bg: rgba(0, 0, 0, 0.85);
   --cookie-banner-text: #ffffff;
   --cookie-banner-button-bg: #ffffff;
   --cookie-banner-button-text: #000000;
   --cookie-banner-button-hover-bg: #cccccc;
-
   --toggle-button-bg: #2c3e50;
   --toggle-button-text: #ffffff;
   --toggle-button-hover-bg: #34495e;
@@ -571,7 +564,6 @@ footer a:hover {
   flex-direction: column;
   align-items: center;
 }
-
 .cookie-banner p {
   margin-bottom: 15px;
   font-size: 1rem;
@@ -633,4 +625,47 @@ footer a:hover {
 .policy-content.visible {
   max-height: 1000px;
   opacity: 1;
+}
+
+/* Tablette */
+@media (max-width: 1024px) {
+  body {
+    font-size: 90%;
+  }
+  .chambres-grid, .service-grid, .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+  nav ul {
+    display: none;
+  }
+  nav ul.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    background: var(--header-bg);
+    padding: 20px 0;
+  }
+  section {
+    padding: 80px 10px;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  .gallery-item img {
+    height: auto;
+  }
 }
