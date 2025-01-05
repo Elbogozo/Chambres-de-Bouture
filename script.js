@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const galleryGrid = document.getElementById('gallery-grid');
   const prevButton = document.getElementById('prev-button');
   const nextButton = document.getElementById('next-button');
-  
+
   const imagePaths = [
     "photo/carousel-1.webp",
     "photo/carousel-2.webp",
@@ -49,6 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
         img.src = imgSrc;
         img.alt = `Photo ${index + 1}`;
         img.loading = "lazy";
+        img.style.width = "100%";
+        img.style.height = "200px";
+        img.style.objectFit = "cover";
         div.appendChild(img);
         galleryGrid.appendChild(div);
       });
@@ -58,96 +61,27 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const initGallery = () => {
-    const initialImages = getRandomImages([], 9);
+    const initialImages = getRandomImages([], 6);
     displayImages(initialImages);
   };
 
   prevButton.addEventListener('click', () => {
-    const newImages = getRandomImages(currentImages, 9);
-    if (newImages.length < 9) {
-      // If not enough new images, reset the exclude list
-      displayImages(getRandomImages([], 9));
+    const newImages = getRandomImages(currentImages, 6);
+    if (newImages.length < 6) {
+      displayImages(getRandomImages([], 6));
     } else {
       displayImages(newImages);
     }
   });
 
   nextButton.addEventListener('click', () => {
-    const newImages = getRandomImages(currentImages, 9);
-    if (newImages.length < 9) {
-      displayImages(getRandomImages([], 9));
+    const newImages = getRandomImages(currentImages, 6);
+    if (newImages.length < 6) {
+      displayImages(getRandomImages([], 6));
     } else {
       displayImages(newImages);
     }
   });
 
   initGallery();
-
-  const hamburger = document.querySelector(".hamburger");
-  const navLinks = document.querySelector("nav ul");
-
-  hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    navLinks.classList.toggle("active");
-    const expanded = hamburger.classList.contains("active");
-    hamburger.setAttribute("aria-expanded", expanded);
-  });
-
-  const navItems = document.querySelectorAll("nav ul li a");
-  navItems.forEach(item => {
-    item.addEventListener("click", () => {
-      hamburger.classList.remove("active");
-      navLinks.classList.remove("active");
-      hamburger.setAttribute("aria-expanded", "false");
-    });
-  });
-
-  const toggleMentions = document.getElementById("toggle-mentions");
-  const toggleMentionsFooter = document.getElementById("toggle-mentions-footer");
-  const mentionsLegales = document.getElementById("mentions-legales");
-
-  const toggleMentionsVisibility = () => {
-    mentionsLegales.classList.toggle("hidden");
-    mentionsLegales.classList.toggle("visible");
-  };
-
-  toggleMentions.addEventListener("click", toggleMentionsVisibility);
-  toggleMentionsFooter.addEventListener("click", toggleMentionsVisibility);
-
-  const cookieBanner = document.getElementById("cookie-banner");
-  const acceptBtn = document.getElementById("accept-cookies");
-  const declineBtn = document.getElementById("decline-cookies");
-
-  if (!localStorage.getItem("cookiesAccepted") && !localStorage.getItem("cookiesDeclined")) {
-    cookieBanner.style.display = "flex";
-  }
-
-  acceptBtn.addEventListener("click", () => {
-    localStorage.setItem("cookiesAccepted", "true");
-    cookieBanner.style.display = "none";
-  });
-
-  declineBtn.addEventListener("click", () => {
-    localStorage.setItem("cookiesDeclined", "true");
-    cookieBanner.style.display = "none";
-  });
-
-  const togglePolitique = document.getElementById("toggle-politique");
-  const politiqueContent = document.getElementById("politique-confidentialite");
-
-  togglePolitique.addEventListener("click", () => {
-    politiqueContent.classList.toggle("hidden");
-    politiqueContent.classList.toggle("visible");
-    if (politiqueContent.classList.contains("visible")) {
-      togglePolitique.textContent = "Fermer la Politique de Confidentialité";
-    } else {
-      togglePolitique.textContent = "Lire la Politique de Confidentialité";
-    }
-  });
-
-  hamburger.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      hamburger.click();
-    }
-  });
 });
